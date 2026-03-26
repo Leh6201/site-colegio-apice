@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+  App\:
+    resource: '../src/*'
+    exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.development}'
+  App\CacheKernel:
+    decorates: http_cache
+    arguments:
+      - '@kernel'
+      - '@http_cache.store'
+      - '@?esi'
+  cloud_connection_service:
+    class: App\Services\CloudConnectionService
+    public: true

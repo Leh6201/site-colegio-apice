@@ -1,0 +1,38 @@
+cloud_connect_route:
+  path: '{prefix}cloud/connect'
+  controller: App\CloudController::indexAction
+  requirements:
+    prefix: '.*'
+
+cloud_clear_cache:
+  path: '{prefix}cloud/cache-clear'
+  controller: App\CloudController::clearCacheAction
+  requirements:
+    prefix: '.*'
+
+cloud_reconnect_route:
+  path: '{prefix}cloud/reconnect'
+  controller: App\CloudController::cloudReconnectAction
+  requirements:
+    prefix: '.*'
+
+cloud_check_connection_route:
+  path: '{prefix}cloud/healthcheck'
+  controller: App\CloudController::cloudHealthcheckAction
+  requirements:
+    prefix: '.*'
+
+robots_txt:
+  path: '/robots.txt'
+  controller: App\ProxyController::robotsTxtAction
+
+sitemap:
+  path: '/sitemap.xml'
+  controller: App\ProxyController::sitemapAction
+
+proxy:
+  path: '/{dynamicRoute}'
+  controller: 'App\ProxyController::indexAction'
+  methods: GET|POST
+  requirements:
+    dynamicRoute: '^(?!.*\.(.+)).*$'

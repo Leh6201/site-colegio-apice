@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width" name="viewport"/>
+            <title></title>
+    
+    <link href="/var/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/var/assets/preview-404/style.css" rel="stylesheet"/>
+
+            <link href="/var/assets/img//cropped-favicon-32x32.png" rel="icon" sizes="32x32"/>
+        <link href="/var/assets/img//cropped-favicon-192x192.png" rel="icon" sizes="192x192"/>
+        <link href="/var/assets/img//cropped-favicon-180x180.png" rel="apple-touch-icon-precomposed"/>
+        <meta content="https://cloud-1de12d.becdn.net/cropped-favicon-270x270.png" name="msapplication-TileImage"/>
+        <link rel="shortcut icon" href="https://cloud-1de12d.becdn.net/images/favicon.ico" type="image/png">
+    </head>
+<body class="brz brz-ed">
+    <div class="dash-wrap">
+        <div class="container">
+            <div class="notification-wrap">
+                <div class="notification">
+                    <div class="notification-text">
+                        <p>
+                            Currently, the homepage is not published. Please switch it from Draft to Publish to make it visible.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

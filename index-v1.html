@@ -1,0 +1,2391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colégio Ápice — Amparo & Pedreira</title>
+    <meta name="description" content="Colégio Ápice - Educação de qualidade do Pré ao Ensino Médio. Unidades em Amparo e Pedreira. Sistema ETAPA de ensino.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════
+           CSS VARIABLES & RESET
+           ═══════════════════════════════════════════ */
+        :root {
+            --teal-deep: #0B5E5A;
+            --teal: #0E7C76;
+            --teal-light: #12A39B;
+            --teal-pale: #E8F6F5;
+            --orange: #F28C28;
+            --orange-warm: #F5A623;
+            --orange-light: #FFF3E0;
+            --cream: #FDF8F0;
+            --cream-dark: #F5EDE0;
+            --white: #FFFFFF;
+            --dark: #1A2A2A;
+            --dark-soft: #2D4040;
+            --gray: #6B7F7F;
+            --gray-light: #A0B0B0;
+            --gray-pale: #E8EDED;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, sans-serif;
+            --shadow-sm: 0 2px 8px rgba(11,94,90,0.08);
+            --shadow-md: 0 8px 30px rgba(11,94,90,0.12);
+            --shadow-lg: 0 20px 60px rgba(11,94,90,0.15);
+            --shadow-orange: 0 8px 30px rgba(242,140,40,0.25);
+            --radius: 16px;
+            --radius-sm: 8px;
+            --radius-lg: 24px;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--dark);
+            background: var(--cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ═══════════════════════════════════════════
+           UTILITY CLASSES
+           ═══════════════════════════════════════════ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-label {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-label::before {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: var(--orange);
+            display: inline-block;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .section-title em {
+            color: var(--teal);
+            font-style: italic;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--gray);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* ═══════════════════════════════════════════
+           SCROLL ANIMATIONS
+           ═══════════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+
+        /* ═══════════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════════ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 0;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            padding: 12px 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: color 0.4s;
+        }
+
+        .navbar.scrolled .navbar-logo {
+            color: var(--teal-deep);
+        }
+
+        .navbar-logo .logo-img {
+            height: 48px;
+            width: auto;
+        }
+
+        .navbar-logo span { color: var(--orange); }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .navbar-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+            transition: color var(--transition);
+            position: relative;
+        }
+
+        .navbar.scrolled .navbar-links a {
+            color: var(--dark-soft);
+        }
+
+        .navbar-links a:hover {
+            color: var(--orange);
+        }
+
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width var(--transition);
+        }
+
+        .navbar-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-matricula {
+            background: var(--orange);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: all var(--transition);
+            box-shadow: var(--shadow-orange);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-matricula:hover {
+            background: var(--orange-warm);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(242,140,40,0.35);
+        }
+
+        .btn-matricula::after { display: none !important; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: white;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .navbar.scrolled .hamburger span {
+            background: var(--dark);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ═══════════════════════════════════════════
+           HERO SECTION
+           ═══════════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 50%, var(--teal-light) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(242,140,40,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            background-image:
+                radial-gradient(circle at 20% 50%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 60% 80%, white 1px, transparent 1px);
+            background-size: 60px 60px, 80px 80px, 50px 50px;
+        }
+
+        /* Floating shapes */
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+        .hero-shape-1 {
+            width: 400px; height: 400px;
+            background: var(--orange);
+            top: -100px; right: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+        .hero-shape-2 {
+            width: 200px; height: 200px;
+            background: white;
+            bottom: 10%; left: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+        .hero-shape-3 {
+            width: 120px; height: 120px;
+            background: var(--orange);
+            top: 40%; right: 20%;
+            animation: float 6s ease-in-out infinite 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(15px, -20px) rotate(3deg); }
+            66% { transform: translate(-10px, 15px) rotate(-2deg); }
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: 800;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .hero-content h1 em {
+            color: var(--orange);
+            font-style: italic;
+            position: relative;
+        }
+
+        .hero-content h1 em::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(242,140,40,0.3);
+            border-radius: 4px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+            max-width: 480px;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .btn-hero-primary {
+            background: var(--orange);
+            color: white;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--transition);
+            box-shadow: var(--shadow-orange);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(242,140,40,0.4);
+        }
+
+        .btn-hero-secondary {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+
+        .btn-hero-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-number {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .hero-stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .hero-image-main {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(242,140,40,0.2) 100%);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image-main .hero-emoji-scene {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            font-size: 4rem;
+        }
+
+        .hero-emoji-row {
+            display: flex;
+            gap: 12px;
+            animation: gentle-bounce 3s ease-in-out infinite;
+        }
+
+        .hero-emoji-row:nth-child(2) { animation-delay: 0.5s; }
+        .hero-emoji-row:nth-child(3) { animation-delay: 1s; }
+
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .hero-card-float {
+            position: absolute;
+            background: white;
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: float-card 4s ease-in-out infinite;
+        }
+
+        @keyframes float-card {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .hero-card-1 {
+            top: 10%;
+            left: -30px;
+            animation-delay: 0s;
+        }
+
+        .hero-card-2 {
+            bottom: 15%;
+            right: -30px;
+            animation-delay: 1.5s;
+        }
+
+        .hero-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .hero-card-1 .hero-card-icon {
+            background: var(--teal-pale);
+        }
+
+        .hero-card-2 .hero-card-icon {
+            background: var(--orange-light);
+        }
+
+        .hero-card-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .hero-card-text small {
+            display: block;
+            font-weight: 400;
+            color: var(--gray);
+            font-size: 0.7rem;
+        }
+
+        /* Badge ETAPA */
+        .etapa-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: white;
+            font-weight: 500;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .etapa-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--orange);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        /* ═══════════════════════════════════════════
+           MARQUEE
+           ═══════════════════════════════════════════ */
+        .marquee-strip {
+            background: var(--orange);
+            padding: 14px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 25s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            padding: 0 40px;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .marquee-item .sep {
+            width: 6px;
+            height: 6px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ═══════════════════════════════════════════
+           ABOUT SECTION
+           ═══════════════════════════════════════════ */
+        .about {
+            padding: 120px 0;
+            background: var(--white);
+            position: relative;
+        }
+
+        .about .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .about-img-block {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-img-block .img-placeholder {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .about-img-block:nth-child(1) .img-placeholder { background: var(--teal-pale); }
+        .about-img-block:nth-child(2) .img-placeholder {
+            background: var(--orange-light);
+            transform: translateY(30px);
+        }
+        .about-img-block:nth-child(3) .img-placeholder { background: linear-gradient(135deg, var(--cream), var(--cream-dark)); }
+        .about-img-block:nth-child(4) .img-placeholder {
+            background: var(--teal-pale);
+            transform: translateY(-30px);
+        }
+
+        .about-experience-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--teal-deep);
+            color: white;
+            padding: 16px 28px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--shadow-lg);
+            z-index: 2;
+        }
+
+        .about-experience-badge .number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1;
+        }
+
+        .about-experience-badge .text {
+            font-size: 0.8rem;
+            font-weight: 500;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        .about-content .values-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 36px;
+        }
+
+        .value-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .value-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .value-item:nth-child(1) .value-icon { background: var(--teal-pale); }
+        .value-item:nth-child(2) .value-icon { background: var(--orange-light); }
+        .value-item:nth-child(3) .value-icon { background: #F0E6FF; }
+
+        .value-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .value-item p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════════
+           LEVELS SECTION (Segmentos)
+           ═══════════════════════════════════════════ */
+        .levels {
+            padding: 120px 0;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .levels-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .levels-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .level-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 40px 28px;
+            text-align: center;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .level-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            transition: height var(--transition);
+        }
+
+        .level-card:nth-child(1)::before { background: #FF6B9D; }
+        .level-card:nth-child(2)::before { background: var(--orange); }
+        .level-card:nth-child(3)::before { background: var(--teal); }
+        .level-card:nth-child(4)::before { background: #7C5CFC; }
+
+        .level-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gray-pale);
+        }
+
+        .level-card:hover::before {
+            height: 6px;
+        }
+
+        .level-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .level-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .level-card .level-age {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .level-card:nth-child(1) .level-age { color: #FF6B9D; }
+        .level-card:nth-child(2) .level-age { color: var(--orange); }
+        .level-card:nth-child(3) .level-age { color: var(--teal); }
+        .level-card:nth-child(4) .level-age { color: #7C5CFC; }
+
+        .level-card p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════════
+           METHODOLOGY SECTION (Sistema ETAPA)
+           ═══════════════════════════════════════════ */
+        .methodology {
+            padding: 120px 0;
+            background: var(--teal-deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .methodology::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(ellipse at 80% 50%, rgba(242,140,40,0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        .methodology .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .methodology .section-title {
+            color: white;
+        }
+
+        .methodology .section-title em {
+            color: var(--orange);
+        }
+
+        .methodology .section-desc {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .method-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .method-feature {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: all var(--transition);
+        }
+
+        .method-feature:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-4px);
+        }
+
+        .method-feature .feat-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .method-feature h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+        }
+
+        .method-feature p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        .method-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .method-graphic {
+            width: 100%;
+            max-width: 420px;
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .method-graphic::before {
+            content: '';
+            position: absolute;
+            inset: 30px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255,255,255,0.1);
+            animation: spin 30s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .method-center-text {
+            text-align: center;
+            color: white;
+        }
+
+        .method-center-text .logo-text {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .method-center-text .logo-text span {
+            color: var(--orange);
+        }
+
+        .method-center-text .sub {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.5;
+        }
+
+        .method-orbit-item {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .method-orbit-item:nth-child(2) { top: 5%; left: 50%; transform: translateX(-50%); }
+        .method-orbit-item:nth-child(3) { top: 25%; right: 5%; }
+        .method-orbit-item:nth-child(4) { bottom: 25%; right: 5%; }
+        .method-orbit-item:nth-child(5) { bottom: 5%; left: 50%; transform: translateX(-50%); }
+        .method-orbit-item:nth-child(6) { bottom: 25%; left: 5%; }
+        .method-orbit-item:nth-child(7) { top: 25%; left: 5%; }
+
+        /* ═══════════════════════════════════════════
+           DIFFERENTIALS SECTION
+           ═══════════════════════════════════════════ */
+        .differentials {
+            padding: 120px 0;
+            background: white;
+        }
+
+        .diff-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .diff-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .diff-card {
+            background: var(--cream);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diff-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .diff-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .diff-card:nth-child(1) .diff-icon { background: var(--teal-pale); }
+        .diff-card:nth-child(2) .diff-icon { background: var(--orange-light); }
+        .diff-card:nth-child(3) .diff-icon { background: #F0E6FF; }
+        .diff-card:nth-child(4) .diff-icon { background: #FFE8E8; }
+        .diff-card:nth-child(5) .diff-icon { background: #E6F7E9; }
+        .diff-card:nth-child(6) .diff-icon { background: #FFF3CC; }
+
+        .diff-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .diff-card p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════════
+           NUMBERS / COUNTER SECTION
+           ═══════════════════════════════════════════ */
+        .numbers {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .numbers::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .numbers .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .number-item .number-value {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .number-item .number-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+        }
+
+        /* ═══════════════════════════════════════════
+           TESTIMONIALS
+           ═══════════════════════════════════════════ */
+        .testimonials {
+            padding: 120px 0;
+            background: var(--cream);
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .testimonials-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            position: relative;
+            transition: all var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .testimonial-stars {
+            color: var(--orange);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: var(--dark-soft);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-text::before {
+            content: '\201C';
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--teal-pale);
+            line-height: 0;
+            vertical-align: -0.6em;
+            margin-right: 4px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .testimonial-card:nth-child(1) .testimonial-avatar { background: var(--teal); }
+        .testimonial-card:nth-child(2) .testimonial-avatar { background: var(--orange); }
+        .testimonial-card:nth-child(3) .testimonial-avatar { background: #7C5CFC; }
+
+        .testimonial-author-info h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .testimonial-author-info p {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        /* ═══════════════════════════════════════════
+           UNITS SECTION
+           ═══════════════════════════════════════════ */
+        .units {
+            padding: 120px 0;
+            background: white;
+        }
+
+        .units-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .units-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .unit-card {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            transition: all var(--transition);
+        }
+
+        .unit-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .unit-card-top {
+            padding: 40px 36px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .unit-card:nth-child(1) .unit-card-top {
+            background: linear-gradient(135deg, var(--teal-deep), var(--teal));
+        }
+
+        .unit-card:nth-child(2) .unit-card-top {
+            background: linear-gradient(135deg, var(--orange), #E67A15);
+        }
+
+        .unit-card-top::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .unit-card-top .unit-name {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .unit-card-top .unit-city {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+
+        .unit-card-top .unit-emoji {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        .unit-card-body {
+            background: var(--cream);
+            padding: 32px 36px;
+        }
+
+        .unit-info-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-pale);
+        }
+
+        .unit-info-row:last-child {
+            border-bottom: none;
+        }
+
+        .unit-info-row .info-icon {
+            width: 36px;
+            height: 36px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .unit-info-row .info-text {
+            font-size: 0.9rem;
+            color: var(--dark-soft);
+            font-weight: 500;
+        }
+
+        .unit-info-row .info-text a {
+            color: var(--teal);
+            font-weight: 600;
+            transition: color var(--transition);
+        }
+
+        .unit-info-row .info-text a:hover {
+            color: var(--orange);
+        }
+
+        /* ═══════════════════════════════════════════
+           CTA SECTION
+           ═══════════════════════════════════════════ */
+        .cta {
+            padding: 100px 0;
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 100%);
+            border-radius: 32px;
+            padding: 80px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(242,140,40,0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-box .section-title {
+            color: white;
+            max-width: 700px;
+            margin: 0 auto 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-box .section-title em {
+            color: var(--orange);
+        }
+
+        .cta-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-btn-whatsapp {
+            background: #25D366;
+            color: white;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all var(--transition);
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-body);
+            box-shadow: 0 8px 30px rgba(37,211,102,0.3);
+        }
+
+        .cta-btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37,211,102,0.4);
+        }
+
+        /* ═══════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════ */
+        .footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.7);
+            padding: 80px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand .footer-logo span {
+            color: var(--orange);
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: var(--orange);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            transition: color var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ═══════════════════════════════════════════
+           WHATSAPP FLOATING BUTTON
+           ═══════════════════════════════════════════ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 6px 25px rgba(37,211,102,0.4);
+            z-index: 999;
+            transition: all var(--transition);
+            animation: whatsapp-pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 35px rgba(37,211,102,0.5);
+        }
+
+        @keyframes whatsapp-pulse {
+            0% { box-shadow: 0 6px 25px rgba(37,211,102,0.4); }
+            50% { box-shadow: 0 6px 25px rgba(37,211,102,0.4), 0 0 0 12px rgba(37,211,102,0.1); }
+            100% { box-shadow: 0 6px 25px rgba(37,211,102,0.4); }
+        }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .levels-grid { grid-template-columns: repeat(2, 1fr); }
+            .diff-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links { display: none; }
+            .navbar-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--teal-deep);
+                justify-content: center;
+                align-items: center;
+                gap: 28px;
+                z-index: 1000;
+            }
+            .navbar-links.mobile-open a {
+                color: white !important;
+                font-size: 1.2rem;
+            }
+            .hamburger { display: flex; }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 120px;
+                padding-bottom: 80px;
+            }
+            .hero-subtitle { margin: 0 auto 40px; }
+            .hero-actions { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-visual { order: -1; }
+            .hero-image-wrapper { max-width: 300px; margin: 0 auto 40px; }
+
+            .about .container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .about-visual { order: -1; }
+
+            .levels-grid { grid-template-columns: 1fr 1fr; }
+
+            .methodology .container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .method-visual { order: -1; }
+            .method-graphic { max-width: 280px; }
+
+            .diff-grid { grid-template-columns: 1fr; }
+            .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .units-grid { grid-template-columns: 1fr; }
+
+            .cta-box { padding: 60px 28px; }
+
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 2rem; }
+            .hero-stats { flex-direction: column; gap: 20px; align-items: center; }
+            .hero-actions { flex-direction: column; align-items: center; }
+            .levels-grid { grid-template-columns: 1fr; }
+            .method-features { grid-template-columns: 1fr; }
+            .numbers-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* ═══════════════════════════════════════════
+           SMOOTH LOAD ANIMATION
+           ═══════════════════════════════════════════ */
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--teal-deep);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .page-loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loader-content .loader-logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            animation: loader-pulse 1.5s ease-in-out infinite;
+        }
+
+        .loader-content .loader-logo span {
+            color: var(--orange);
+        }
+
+        @keyframes loader-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            width: 44px;
+            height: 44px;
+            background: var(--teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all var(--transition);
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            border: none;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--teal-deep);
+            transform: translateY(-3px);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <img src="https://apicecolegio.com.br/logo-apice.png" alt="Colégio Ápice" style="height:80px;width:auto;animation: loader-pulse 1.5s ease-in-out infinite;">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="navbar-logo">
+                <img src="https://apicecolegio.com.br/logo-apice.png" alt="Colégio Ápice" class="logo-img">
+            </a>
+            <div class="navbar-links" id="navLinks">
+                <a href="#sobre">Sobre</a>
+                <a href="#segmentos">Segmentos</a>
+                <a href="#metodologia">Metodologia</a>
+                <a href="#diferenciais">Diferenciais</a>
+                <a href="#depoimentos">Depoimentos</a>
+                <a href="#unidades">Unidades</a>
+                <a href="#contato" class="btn-matricula">Matricule-se</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-pattern"></div>
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3"></div>
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="etapa-badge">
+                    <span class="dot"></span>
+                    Sistema ETAPA de Ensino
+                </div>
+                <h1>Seus filhos merecem o <em>melhor</em> começo</h1>
+                <p class="hero-subtitle">
+                    Educação de excelência do Pré ao Ensino Médio, com carinho, estrutura e método comprovado. Duas unidades para atender sua família em Amparo e Pedreira.
+                </p>
+                <div class="hero-actions">
+                    <a href="#contato" class="btn-hero-primary">
+                        Agende uma Visita
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#sobre" class="btn-hero-secondary">
+                        Conheça o Ápice
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">2</div>
+                        <div class="hero-stat-label">Unidades</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">15+</div>
+                        <div class="hero-stat-label">Anos de história</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">98%</div>
+                        <div class="hero-stat-label">Aprovação dos pais</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-main">
+                        <div class="hero-emoji-scene">
+                            <div class="hero-emoji-row" style="font-size:3.5rem;">
+                                &#x1F393;
+                            </div>
+                            <div class="hero-emoji-row" style="font-size:2.5rem;">
+                                &#x1F4DA; &#x270D;&#xFE0F; &#x1F3A8;
+                            </div>
+                            <div class="hero-emoji-row" style="font-size:2rem;">
+                                &#x2B50; &#x1F31F; &#x2B50;
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-card-float hero-card-1">
+                        <div class="hero-card-icon">&#x1F4D6;</div>
+                        <div class="hero-card-text">
+                            Sistema ETAPA
+                            <small>Material didático completo</small>
+                        </div>
+                    </div>
+                    <div class="hero-card-float hero-card-2">
+                        <div class="hero-card-icon">&#x1F3C6;</div>
+                        <div class="hero-card-text">
+                            Ensino premiado
+                            <small>Resultados comprovados</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Strip -->
+    <div class="marquee-strip">
+        <div class="marquee-track">
+            <div class="marquee-item">&#x1F393; Educação Infantil <span class="sep"></span></div>
+            <div class="marquee-item">&#x1F4DA; Ensino Fundamental <span class="sep"></span></div>
+            <div class="marquee-item">&#x1F3AF; Ensino Médio <span class="sep"></span></div>
+            <div class="marquee-item">&#x1F31F; Sistema ETAPA <span class="sep"></span></div>
+            <div class="marquee-item">&#x1F3D7;&#xFE0F; Infraestrutura Completa <span class="sep"></span></div>
+            <div class="marquee-item">&#x2764;&#xFE0F; Amparo & Pedreira <span class="sep"></span></div>
+            <div class="marquee-item">&#x1F393; Educação Infantil <span class="sep"></span></div>
+            <div class="marquee-item">&#x1F4DA; Ensino Fundamental <span class="sep"></span></div>
+            <div class="marquee-item">&#x1F3AF; Ensino Médio <span class="sep"></span></div>
+            <div class="marquee-item">&#x1F31F; Sistema ETAPA <span class="sep"></span></div>
+            <div class="marquee-item">&#x1F3D7;&#xFE0F; Infraestrutura Completa <span class="sep"></span></div>
+            <div class="marquee-item">&#x2764;&#xFE0F; Amparo & Pedreira <span class="sep"></span></div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about" id="sobre">
+        <div class="container">
+            <div class="about-visual reveal-left">
+                <div class="about-image-grid">
+                    <div class="about-img-block">
+                        <div class="img-placeholder">&#x1F9D1;&#x200D;&#x1F3EB;</div>
+                    </div>
+                    <div class="about-img-block">
+                        <div class="img-placeholder">&#x1F466;&#x1F467;</div>
+                    </div>
+                    <div class="about-img-block">
+                        <div class="img-placeholder">&#x1F3A8;</div>
+                    </div>
+                    <div class="about-img-block">
+                        <div class="img-placeholder">&#x1F4BB;</div>
+                    </div>
+                </div>
+                <div class="about-experience-badge">
+                    <div class="number">15+</div>
+                    <div class="text">Anos formando<br>o futuro</div>
+                </div>
+            </div>
+
+            <div class="about-content reveal-right">
+                <div class="section-label">Quem Somos</div>
+                <h2 class="section-title">Uma escola que <em>acolhe</em> e <em>transforma</em></h2>
+                <p class="section-desc">
+                    O Colégio Ápice nasceu do sonho de criar um espaço onde cada criança e adolescente é visto de forma única. Com unidades em Amparo e Pedreira, oferecemos educação completa do Pré ao Ensino Médio, aliando afeto, disciplina e inovação pedagógica.
+                </p>
+                <div class="values-list">
+                    <div class="value-item reveal stagger-1">
+                        <div class="value-icon">&#x1F49A;</div>
+                        <div>
+                            <h4>Educação com Afeto</h4>
+                            <p>Acreditamos que aprender começa com se sentir acolhido. Cada aluno é tratado pelo nome e com respeito.</p>
+                        </div>
+                    </div>
+                    <div class="value-item reveal stagger-2">
+                        <div class="value-icon">&#x1F4A1;</div>
+                        <div>
+                            <h4>Inovação Pedagógica</h4>
+                            <p>Metodologias ativas, tecnologia em sala de aula e projetos interdisciplinares que formam cidadãos completos.</p>
+                        </div>
+                    </div>
+                    <div class="value-item reveal stagger-3">
+                        <div class="value-icon">&#x1F91D;</div>
+                        <div>
+                            <h4>Parceria com a Família</h4>
+                            <p>Mantemos um canal aberto e transparente com os pais, pois educação de qualidade se faz em conjunto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Levels Section -->
+    <section class="levels" id="segmentos">
+        <div class="container">
+            <div class="levels-header reveal">
+                <div class="section-label" style="justify-content:center;">Segmentos de Ensino</div>
+                <h2 class="section-title">Do primeiro passo à <em>conquista</em> do diploma</h2>
+                <p class="section-desc">
+                    Acompanhamos seu filho em todas as fases do desenvolvimento, com uma proposta pedagógica contínua e integrada.
+                </p>
+            </div>
+            <div class="levels-grid">
+                <div class="level-card reveal stagger-1">
+                    <span class="level-emoji">&#x1F476;</span>
+                    <h3>Educação Infantil</h3>
+                    <div class="level-age">2 a 5 anos</div>
+                    <p>Aprendizado lúdico e sensorial que desperta a curiosidade, a criatividade e a socialização nos primeiros anos.</p>
+                </div>
+                <div class="level-card reveal stagger-2">
+                    <span class="level-emoji">&#x1F4DA;</span>
+                    <h3>Fundamental I</h3>
+                    <div class="level-age">6 a 10 anos</div>
+                    <p>Base sólida de alfabetização, raciocínio lógico e descoberta do mundo com acompanhamento individualizado.</p>
+                </div>
+                <div class="level-card reveal stagger-3">
+                    <span class="level-emoji">&#x1F52C;</span>
+                    <h3>Fundamental II</h3>
+                    <div class="level-age">11 a 14 anos</div>
+                    <p>Aprofundamento do conhecimento, desenvolvimento do pensamento crítico e projetos interdisciplinares.</p>
+                </div>
+                <div class="level-card reveal stagger-4">
+                    <span class="level-emoji">&#x1F680;</span>
+                    <h3>Ensino Médio</h3>
+                    <div class="level-age">15 a 17 anos</div>
+                    <p>Preparação completa para vestibulares e ENEM, com foco em resultados e orientação de carreira.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section class="methodology" id="metodologia">
+        <div class="container">
+            <div class="reveal-left">
+                <div class="section-label" style="color: rgba(255,255,255,0.5);">Metodologia</div>
+                <h2 class="section-title">O poder do <em>Sistema ETAPA</em></h2>
+                <p class="section-desc">
+                    O Sistema ETAPA é referência nacional em material didático e metodologia de ensino. Combinamos esse rigor acadêmico com o acolhimento e a atenção individual que só uma escola como o Ápice pode oferecer.
+                </p>
+                <div class="method-features">
+                    <div class="method-feature reveal stagger-1">
+                        <span class="feat-icon">&#x1F4D6;</span>
+                        <h4>Material Didático</h4>
+                        <p>Apostilas e conteúdos atualizados, desenvolvidos por especialistas renomados.</p>
+                    </div>
+                    <div class="method-feature reveal stagger-2">
+                        <span class="feat-icon">&#x1F4BB;</span>
+                        <h4>Plataforma Digital</h4>
+                        <p>Ferramentas online para estudo, exercícios e acompanhamento de performance.</p>
+                    </div>
+                    <div class="method-feature reveal stagger-3">
+                        <span class="feat-icon">&#x1F9E0;</span>
+                        <h4>Pensamento Crítico</h4>
+                        <p>Metodologia que desenvolve raciocínio lógico e autonomia intelectual.</p>
+                    </div>
+                    <div class="method-feature reveal stagger-4">
+                        <span class="feat-icon">&#x1F3AF;</span>
+                        <h4>Foco em Resultados</h4>
+                        <p>Avaliações contínuas e simulados preparatórios para ENEM e vestibulares.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-visual reveal-scale">
+                <div class="method-graphic">
+                    <div class="method-center-text">
+                        <img src="https://apicecolegio.com.br/logo-apice.png" alt="Colégio Ápice" style="height:80px;width:auto;margin:0 auto 8px;display:block;filter:brightness(0) invert(1) opacity(0.85);">
+                        <div class="logo-text">Colégio <span>Ápice</span></div>
+                        <div class="sub">Sistema ETAPA</div>
+                    </div>
+                    <div class="method-orbit-item">&#x1F4D6;</div>
+                    <div class="method-orbit-item">&#x1F4BB;</div>
+                    <div class="method-orbit-item">&#x1F9EA;</div>
+                    <div class="method-orbit-item">&#x1F3A8;</div>
+                    <div class="method-orbit-item">&#x26BD;</div>
+                    <div class="method-orbit-item">&#x1F3B5;</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differentials Section -->
+    <section class="differentials" id="diferenciais">
+        <div class="container">
+            <div class="diff-header reveal">
+                <div class="section-label" style="justify-content:center;">Por que escolher o Ápice</div>
+                <h2 class="section-title">Nossos <em>diferenciais</em></h2>
+                <p class="section-desc">
+                    Tudo o que seu filho precisa para aprender, crescer e se desenvolver em um ambiente seguro e estimulante.
+                </p>
+            </div>
+            <div class="diff-grid">
+                <div class="diff-card reveal stagger-1">
+                    <div class="diff-icon">&#x1F468;&#x200D;&#x1F3EB;</div>
+                    <h3>Equipe Qualificada</h3>
+                    <p>Professores com formação contínua, paixão por ensinar e dedicação individual a cada aluno.</p>
+                </div>
+                <div class="diff-card reveal stagger-2">
+                    <div class="diff-icon">&#x1F3D7;&#xFE0F;</div>
+                    <h3>Infraestrutura Moderna</h3>
+                    <p>Salas climatizadas, laboratórios, quadra poliesportiva, biblioteca e espaços de convivência.</p>
+                </div>
+                <div class="diff-card reveal stagger-3">
+                    <div class="diff-icon">&#x1F310;</div>
+                    <h3>Inglês desde o Infantil</h3>
+                    <p>Programa bilíngue com aulas de inglês integradas ao currículo desde os primeiros anos.</p>
+                </div>
+                <div class="diff-card reveal stagger-4">
+                    <div class="diff-icon">&#x1F4F1;</div>
+                    <h3>Tecnologia Educacional</h3>
+                    <p>Plataformas digitais, tablets e recursos multimídia que enriquecem a experiência de aprendizado.</p>
+                </div>
+                <div class="diff-card reveal stagger-5">
+                    <div class="diff-icon">&#x1F3C3;</div>
+                    <h3>Atividades Extracurriculares</h3>
+                    <p>Esportes, artes, música, robótica e muito mais para desenvolver talentos além da sala de aula.</p>
+                </div>
+                <div class="diff-card reveal stagger-5">
+                    <div class="diff-icon">&#x1F6E1;&#xFE0F;</div>
+                    <h3>Segurança e Acolhimento</h3>
+                    <p>Ambiente seguro com monitoramento, controle de acesso e equipe dedicada ao bem-estar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Numbers Section -->
+    <section class="numbers">
+        <div class="container">
+            <div class="numbers-grid">
+                <div class="number-item reveal stagger-1">
+                    <div class="number-value" data-target="1000">1000+</div>
+                    <div class="number-label">Alunos formados</div>
+                </div>
+                <div class="number-item reveal stagger-2">
+                    <div class="number-value">50+</div>
+                    <div class="number-label">Profissionais dedicados</div>
+                </div>
+                <div class="number-item reveal stagger-3">
+                    <div class="number-value">2</div>
+                    <div class="number-label">Unidades na região</div>
+                </div>
+                <div class="number-item reveal stagger-4">
+                    <div class="number-value">98%</div>
+                    <div class="number-label">Satisfação dos pais</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="depoimentos">
+        <div class="container">
+            <div class="testimonials-header reveal">
+                <div class="section-label" style="justify-content:center;">Depoimentos</div>
+                <h2 class="section-title">O que dizem os <em>pais</em></h2>
+                <p class="section-desc">
+                    A opinião de quem confia no Colégio Ápice para a educação dos seus filhos.
+                </p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal stagger-1">
+                    <div class="testimonial-stars">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div>
+                    <p class="testimonial-text">Meu filho adora ir para a escola! Os professores são incríveis e o carinho que ele recebe é algo que não se encontra em qualquer lugar. O Sistema ETAPA dá toda a base que precisamos.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AC</div>
+                        <div class="testimonial-author-info">
+                            <h4>Ana Carolina M.</h4>
+                            <p>Mãe de aluno — Unidade Amparo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal stagger-2">
+                    <div class="testimonial-stars">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div>
+                    <p class="testimonial-text">Mudamos de escola e foi a melhor decisão. A estrutura é ótima, a comunicação com os pais é transparente e minha filha evoluiu muito em poucos meses. Recomendo de olhos fechados!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">RS</div>
+                        <div class="testimonial-author-info">
+                            <h4>Ricardo S.</h4>
+                            <p>Pai de aluna — Unidade Pedreira</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal stagger-3">
+                    <div class="testimonial-stars">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div>
+                    <p class="testimonial-text">Tenho dois filhos no Ápice, um no fundamental e outro no médio. A escola consegue atender muito bem todas as faixas etárias. Os simulados e a preparação para o ENEM são excelentes.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">FL</div>
+                        <div class="testimonial-author-info">
+                            <h4>Fernanda L.</h4>
+                            <p>Mãe de alunos — Unidade Amparo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Units Section -->
+    <section class="units" id="unidades">
+        <div class="container">
+            <div class="units-header reveal">
+                <div class="section-label" style="justify-content:center;">Nossas Unidades</div>
+                <h2 class="section-title">Perto de <em>você</em></h2>
+                <p class="section-desc">
+                    Duas unidades completas para atender sua família com o mesmo padrão de qualidade e excelência.
+                </p>
+            </div>
+            <div class="units-grid">
+                <div class="unit-card reveal-left">
+                    <div class="unit-card-top">
+                        <div class="unit-name">Unidade Pedreira</div>
+                        <div class="unit-city">Pedreira — SP</div>
+                        <div class="unit-emoji">&#x1F3EB;</div>
+                    </div>
+                    <div class="unit-card-body">
+                        <div class="unit-info-row">
+                            <div class="info-icon">&#x1F4DE;</div>
+                            <div class="info-text"><a href="tel:1938532503">(19) 3853-2503</a></div>
+                        </div>
+                        <div class="unit-info-row">
+                            <div class="info-icon">&#x1F4F1;</div>
+                            <div class="info-text"><a href="https://wa.me/5519998980280" target="_blank">(19) 99898-0280</a></div>
+                        </div>
+                        <div class="unit-info-row">
+                            <div class="info-icon">&#x1F4F7;</div>
+                            <div class="info-text"><a href="https://instagram.com/colegioapicepedreira" target="_blank">@colegioapicepedreira</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="unit-card reveal-right">
+                    <div class="unit-card-top">
+                        <div class="unit-name">Unidade Amparo</div>
+                        <div class="unit-city">Amparo — SP</div>
+                        <div class="unit-emoji">&#x1F3EB;</div>
+                    </div>
+                    <div class="unit-card-body">
+                        <div class="unit-info-row">
+                            <div class="info-icon">&#x1F4DE;</div>
+                            <div class="info-text"><a href="tel:1938074774">(19) 3807-4774</a></div>
+                        </div>
+                        <div class="unit-info-row">
+                            <div class="info-icon">&#x1F4F1;</div>
+                            <div class="info-text"><a href="https://wa.me/5519997512995" target="_blank">(19) 99751-2995</a></div>
+                        </div>
+                        <div class="unit-info-row">
+                            <div class="info-icon">&#x1F4F7;</div>
+                            <div class="info-text"><a href="https://instagram.com/_apiceamparo" target="_blank">@_apiceamparo</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contato">
+        <div class="container">
+            <div class="cta-box reveal-scale">
+                <div class="section-label" style="justify-content:center; color: rgba(255,255,255,0.5);">Matrículas Abertas</div>
+                <h2 class="section-title">Venha fazer parte da <em>família Ápice</em></h2>
+                <p class="cta-desc">
+                    Agende uma visita e conheça de perto a escola que vai transformar o futuro do seu filho.
+                </p>
+                <div class="cta-actions">
+                    <a href="https://wa.me/5519998980280?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20matr%C3%ADculas%20no%20Col%C3%A9gio%20%C3%81pice." class="cta-btn-whatsapp" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        WhatsApp Pedreira
+                    </a>
+                    <a href="https://wa.me/5519997512995?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20matr%C3%ADculas%20no%20Col%C3%A9gio%20%C3%81pice." class="cta-btn-whatsapp" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        WhatsApp Amparo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="https://apicecolegio.com.br/logo-apice.png" alt="Colégio Ápice" style="height:36px;width:auto;">
+                        Colégio <span>Ápice</span>
+                    </div>
+                    <p>Educação de excelência do Pré ao Ensino Médio. Com amor, método e compromisso com o futuro dos nossos alunos.</p>
+                    <div class="footer-social">
+                        <a href="https://instagram.com/colegioapicepedreira" target="_blank" title="Instagram Pedreira">&#x1F4F7;</a>
+                        <a href="https://instagram.com/_apiceamparo" target="_blank" title="Instagram Amparo">&#x1F4F8;</a>
+                        <a href="https://wa.me/5519998980280" target="_blank" title="WhatsApp">&#x1F4AC;</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#segmentos">Segmentos</a></li>
+                        <li><a href="#metodologia">Metodologia</a></li>
+                        <li><a href="#diferenciais">Diferenciais</a></li>
+                        <li><a href="#depoimentos">Depoimentos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Segmentos</h4>
+                    <ul>
+                        <li><a href="#segmentos">Educação Infantil</a></li>
+                        <li><a href="#segmentos">Fundamental I</a></li>
+                        <li><a href="#segmentos">Fundamental II</a></li>
+                        <li><a href="#segmentos">Ensino Médio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="tel:1938532503">Pedreira: (19) 3853-2503</a></li>
+                        <li><a href="tel:1938074774">Amparo: (19) 3807-4774</a></li>
+                        <li><a href="https://wa.me/5519998980280" target="_blank">WhatsApp Pedreira</a></li>
+                        <li><a href="https://wa.me/5519997512995" target="_blank">WhatsApp Amparo</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Colégio Ápice — Amparo & Pedreira. Todos os direitos reservados.</p>
+                <p>Sistema ETAPA de Ensino</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5519998980280?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Col%C3%A9gio%20%C3%81pice." class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" title="Voltar ao topo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Page Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('pageLoader').classList.add('loaded');
+            }, 800);
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('mobile-open');
+        });
+
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('mobile-open');
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 600) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Counter animation
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.number-value');
+                    counters.forEach(counter => {
+                        const text = counter.textContent;
+                        const num = parseInt(text.replace(/\D/g, ''));
+                        const suffix = text.replace(/[\d]/g, '');
+                        let current = 0;
+                        const step = Math.ceil(num / 40);
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= num) {
+                                current = num;
+                                clearInterval(timer);
+                            }
+                            counter.textContent = current + suffix;
+                        }, 40);
+                    });
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const numbersSection = document.querySelector('.numbers-grid');
+        if (numbersSection) counterObserver.observe(numbersSection);
+
+        // Parallax on hero shapes
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            document.querySelectorAll('.hero-shape').forEach((shape, i) => {
+                const speed = (i + 1) * 0.03;
+                shape.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
