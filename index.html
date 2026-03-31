@@ -368,11 +368,18 @@
         .hero .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            grid-template-areas:
+                'content visual'
+                'actions visual';
             gap: 60px;
-            align-items: center;
+            align-items: start;
             padding-top: 80px;
             position: relative;
             z-index: 2;
+        }
+
+        .hero-content {
+            grid-area: content;
         }
 
         .hero-content h1 {
@@ -410,10 +417,11 @@
         }
 
         .hero-actions {
+            grid-area: actions;
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
-            margin-bottom: 50px;
+            margin-top: 8px;
         }
 
         .btn-hero-primary {
@@ -485,6 +493,7 @@
         }
 
         .hero-visual {
+            grid-area: visual;
             position: relative;
             display: flex;
             justify-content: center;
@@ -1052,18 +1061,10 @@
         }
 
         .diff-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.diff-grid > :nth-last-child(2) {
-  grid-column: 2;
-}
-
-.diff-grid > :last-child {
-  grid-column: 3;
-}
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
 
         .diff-card {
             background: var(--cream);
@@ -1916,9 +1917,34 @@
             .levels-grid { grid-template-columns: repeat(2, 1fr); }
             .diff-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+            .hero .container,
+            .about .container,
+            .methodology .container {
+                gap: 48px;
+            }
+            .hero-card-1 { left: -12px; }
+            .hero-card-2 { right: -12px; }
+            .about-experience-badge {
+                padding: 14px 22px;
+                gap: 12px;
+            }
+            .about-experience-badge .number { font-size: 2.1rem; }
+            .method-graphic { max-width: 360px; }
+            .method-orbit-item {
+                width: 54px;
+                height: 54px;
+                font-size: 1.2rem;
+            }
+            .diff-grid > :last-child {
+                grid-column: 1 / 3;
+                width: min(100%, calc((100% - 24px) / 2));
+                max-width: none;
+                justify-self: center;
+            }
         }
 
         @media (max-width: 768px) {
+            .container { padding: 0 20px; }
             .navbar-links { display: none; }
             .navbar-links.mobile-open {
                 display: flex;
@@ -1942,49 +1968,236 @@
 
             .hero .container {
                 grid-template-columns: 1fr;
+                grid-template-areas:
+                    'content'
+                    'visual'
+                    'actions';
                 text-align: center;
                 padding-top: 120px;
-                padding-bottom: 80px;
+                padding-bottom: 72px;
+                gap: 24px;
+            }
+            .hero-content {
+                display: block;
             }
             .hero-subtitle { margin: 0 auto 40px; }
-            .hero-actions { justify-content: center; }
-            .hero-stats { justify-content: center; }
-            .hero-visual { order: -1; }
-            .hero-image-wrapper { max-width: 300px; margin: 0 auto 40px; }
+            .hero-actions {
+                justify-content: center;
+                margin-top: 8px;
+                margin-bottom: 0;
+            }
+            .hero-stats {
+                margin-top: 12px;
+                justify-content: center;
+            }
+            .hero-image-wrapper {
+                max-width: 320px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                align-items: stretch;
+            }
+            .hero-card-float {
+                position: static;
+                animation: none;
+                width: 100%;
+                justify-content: flex-start;
+                text-align: left;
+            }
 
             .about .container {
                 grid-template-columns: 1fr;
-                gap: 50px;
+                gap: 36px;
             }
             .about-visual { order: -1; }
+            .about-content {
+                text-align: center;
+            }
+            .about .section-label {
+                justify-content: center;
+            }
+            .about .section-desc {
+                margin: 0 auto;
+            }
+            .about-image-grid { gap: 12px; }
+            .about-img-block:nth-child(2) .img-placeholder,
+            .about-img-block:nth-child(4) .img-placeholder {
+                transform: none;
+            }
+            .about-experience-badge {
+                position: static;
+                transform: none;
+                margin: 20px auto 0;
+                width: fit-content;
+                max-width: 100%;
+                justify-content: center;
+            }
+            .value-item {
+                text-align: left;
+            }
 
             .levels-grid { grid-template-columns: 1fr 1fr; }
 
             .methodology .container {
                 grid-template-columns: 1fr;
-                gap: 50px;
+                gap: 36px;
+            }
+            .methodology .reveal-left {
+                text-align: center;
+            }
+            .methodology .section-label {
+                justify-content: center;
+            }
+            .methodology .section-desc {
+                margin: 0 auto;
             }
             .method-visual { order: -1; }
-            .method-graphic { max-width: 280px; }
+            .method-graphic {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            .method-center-text .logo-text { font-size: 1.55rem; }
+            .method-center-text .sub {
+                font-size: 0.68rem;
+                letter-spacing: 2px;
+            }
+            .method-orbit-item {
+                width: 50px;
+                height: 50px;
+                font-size: 1.15rem;
+            }
+            .method-orbit-item:nth-child(2) { top: 4%; }
+            .method-orbit-item:nth-child(3) { top: 22%; right: 2%; }
+            .method-orbit-item:nth-child(4) { bottom: 22%; right: 2%; }
+            .method-orbit-item:nth-child(5) { bottom: 4%; }
+            .method-orbit-item:nth-child(6) { bottom: 22%; left: 2%; }
+            .method-orbit-item:nth-child(7) { top: 22%; left: 2%; }
 
             .diff-grid { grid-template-columns: 1fr; }
+            .diff-grid > :last-child {
+                grid-column: auto;
+                max-width: none;
+                width: auto;
+                justify-self: stretch;
+            }
             .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
             .testimonials-grid { grid-template-columns: 1fr; }
             .units-grid { grid-template-columns: 1fr; }
 
             .cta-box { padding: 60px 28px; }
 
-            .footer-grid { grid-template-columns: 1fr; }
+            .footer-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 28px 20px;
+            }
+            .footer-brand {
+                grid-column: 1 / -1;
+                text-align: center;
+            }
+            .footer-brand .footer-logo {
+                justify-content: center;
+            }
+            .footer-brand p {
+                margin: 0 auto;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .footer-grid > .footer-col:last-child {
+                grid-column: auto;
+                width: auto;
+                justify-self: stretch;
+            }
             .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+            .whatsapp-wrapper {
+                right: 16px;
+                bottom: 16px;
+            }
+            .whatsapp-float {
+                width: 56px;
+                height: 56px;
+                font-size: 1.65rem;
+            }
+            .whatsapp-menu {
+                right: 0;
+                bottom: 68px;
+                min-width: min(220px, calc(100vw - 48px));
+            }
+            .back-to-top {
+                right: 16px;
+                bottom: 84px;
+            }
         }
 
         @media (max-width: 480px) {
             .hero-content h1 { font-size: 2rem; }
             .hero-stats { flex-direction: column; gap: 20px; align-items: center; }
             .hero-actions { flex-direction: column; align-items: center; }
+            .hero-actions a,
+            .hero-actions button,
+            .btn-hero-primary,
+            .btn-hero-secondary {
+                width: 100%;
+                justify-content: center;
+            }
             .levels-grid { grid-template-columns: 1fr; }
             .method-features { grid-template-columns: 1fr; }
             .numbers-grid { grid-template-columns: 1fr 1fr; }
+            .hero-image-wrapper { max-width: 100%; }
+            .hero-image-main .hero-emoji-scene { font-size: 3rem; }
+            .hero-emoji-row { gap: 8px; }
+            .hero-card-float {
+                padding: 14px 16px;
+                gap: 10px;
+            }
+            .hero-card-text { font-size: 0.76rem; }
+            .about {
+                padding: 88px 0;
+            }
+            .about-experience-badge {
+                padding: 14px 18px;
+                gap: 10px;
+            }
+            .about-experience-badge .number { font-size: 1.9rem; }
+            .about-experience-badge .text { font-size: 0.75rem; }
+            .methodology {
+                padding: 88px 0;
+            }
+            .method-graphic {
+                max-width: 270px;
+            }
+            .method-graphic::before { inset: 24px; }
+            .method-center-text img { height: 64px !important; }
+            .method-center-text .logo-text { font-size: 1.3rem; }
+            .method-center-text .sub {
+                font-size: 0.62rem;
+                letter-spacing: 1.5px;
+            }
+            .method-orbit-item {
+                width: 42px;
+                height: 42px;
+                font-size: 1rem;
+            }
+            .whatsapp-wrapper {
+                right: 12px;
+                bottom: 12px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .footer-grid > .footer-col:last-child {
+                grid-column: auto;
+                width: auto;
+                justify-self: stretch;
+            }
+            .back-to-top {
+                right: 12px;
+                bottom: 78px;
+                width: 42px;
+                height: 42px;
+            }
         }
 
         /* ═══════════════════════════════════════════
@@ -2114,16 +2327,6 @@
                 <p class="hero-subtitle">
                     Educação de excelência do Pré ao Ensino Médio, com carinho, estrutura e método comprovado. Duas unidades para atender sua família em Amparo e Pedreira.
                 </p>
-                <div class="hero-actions">
-                    <a href="#contato" class="btn-hero-primary">
-                        Agende uma Visita
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="#sobre" class="btn-hero-secondary">
-                        Conheça o Ápice
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-                    </a>
-                </div>
                 <div class="hero-stats">
                     <div class="hero-stat">
                         <div class="hero-stat-number">2</div>
@@ -2170,6 +2373,17 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="hero-actions">
+                <a href="#contato" class="btn-hero-primary">
+                    Agende uma Visita
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#sobre" class="btn-hero-secondary">
+                    Conheça o Ápice
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                </a>
             </div>
         </div>
     </section>
@@ -2521,6 +2735,10 @@
                             <div class="info-icon">&#x1F4F7;</div>
                             <div class="info-text"><a href="https://instagram.com/colegioapicepedreira" target="_blank">@colegioapicepedreira</a></div>
                         </div>
+                        <div class="unit-info-row">
+                            <div class="info-icon">f</div>
+                            <div class="info-text"><a href="https://www.facebook.com/profile.php?id=61577328995348" target="_blank">Colégio Ápice Pedreira</a></div>
+                        </div>
                     </div>
                 </div>
                 <div class="unit-card reveal-right">
@@ -2541,6 +2759,10 @@
                         <div class="unit-info-row">
                             <div class="info-icon">&#x1F4F7;</div>
                             <div class="info-text"><a href="https://instagram.com/_apiceamparo" target="_blank">@_apiceamparo</a></div>
+                        </div>
+                        <div class="unit-info-row">
+                            <div class="info-icon">f</div>
+                            <div class="info-text"><a href="https://www.facebook.com/profile.php?id=61577358515524" target="_blank">Colégio Ápice Amparo</a></div>
                         </div>
                     </div>
                 </div>
